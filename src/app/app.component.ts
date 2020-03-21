@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import {VideoEventsHandlerService} from './services/video-events-handler.service';
+import {GameEvent} from './models/game-event';
+import {first} from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +10,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'test-video';
+  gameEvents: GameEvent[];
+
+  constructor(public videoEventsService: VideoEventsHandlerService) {
+    this.videoEventsService.getGameEvents().pipe(first()).subscribe(d => this.gameEvents = d);
+  }
 }

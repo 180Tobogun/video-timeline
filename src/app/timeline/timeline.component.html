@@ -1,0 +1,27 @@
+<div class="data-container">
+  <div class="time-container">
+    {{format(currentTime)}}
+  </div>
+  <div class="slidecontainer" #sliderContainer>
+    <ng-container *ngIf="viewReady && timerangeScale">
+      <div class="timeline-component {{event.type}}" *ngFor="let event of gameEvents"
+           (click)="setTime(event.time)"
+           [style.width]="eventWidth + 'px'"
+           [style.height]="eventWidth + 'px'"
+           [style.left]="event.left + 'px'">
+        E
+      </div>
+    </ng-container>
+    <input type="range"
+           class="slider"
+           [min]="0"
+           [max]="duration"
+           step="1"
+           [value]="currentTime"
+           (change)="setTime($event.target['valueAsNumber'])">
+  </div>
+  <div class="time-container">
+    {{format(duration)}}
+  </div>
+</div>
+
